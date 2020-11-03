@@ -19,8 +19,7 @@ def bq_snitch():
     tera_bytes_cost = int(os.environ.get("TB_COST"))
     client = bigquery.Client()
     job = client.get_job(job_id)
-    if not hasattr(job, 'total_bytes_billed'):
-        return
+    result=job.result()
     project = job.project
     location = job.location
     bytes_per_tera_bytes = 2 ** 40
